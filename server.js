@@ -24,7 +24,7 @@ const documentSchema = new mongoose.Schema({
 
 const Document = mongoose.model('Document', documentSchema);
 
-app.get('/documents', async (req, res) => {
+app.get('/api/documents', async (req, res) => {
   try {
     const documents = await Document.find();
     res.json(documents);
@@ -33,7 +33,7 @@ app.get('/documents', async (req, res) => {
   }
 });
 
-app.post('/upload', async (req, res) => {
+app.post('/api/upload', async (req, res) => {
   try {
     const { docType, fields, photo } = req.body;
     const newDocument = new Document({ docType, fields, photo });
@@ -44,7 +44,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-app.delete('/delete/:id', async (req, res) => {
+app.delete('/apidelete/:id', async (req, res) => {
   try {
     await Document.findByIdAndDelete(req.params.id);
     res.json({ message: "Document deleted successfully" });
